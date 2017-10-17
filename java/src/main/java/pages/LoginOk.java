@@ -6,8 +6,8 @@ public class LoginOk{
 
     private DriverQA driver;
 
-    public void updateDriver(DriverQA parDriver) {
-        driver = parDriver;
+    public LoginOk(DriverQA stepDriver){
+        driver = stepDriver;
     }
 
     public String getResult(){

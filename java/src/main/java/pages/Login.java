@@ -6,8 +6,8 @@ public class Login {
 
     private DriverQA driver;
 
-    public void updateDriver(DriverQA parDriver) {
-        driver = parDriver;
+    public Login(DriverQA stepDriver){
+        driver = stepDriver;
     }
 
     public void clickLogin(){

@@ -6,8 +6,8 @@ public class LoginFail {
 
     private DriverQA driver;
 
-    public void updateDriver(DriverQA parDriver) {
-        driver = parDriver;
+    public LoginFail(DriverQA stepDriver){
+        driver = stepDriver;
     }
 
     public String getResult(){

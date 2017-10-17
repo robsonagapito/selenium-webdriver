@@ -16,16 +16,9 @@ import java.util.List;
 
 public class LoginSteps extends BaseSteps {
 
-    private static Login login = new Login();
-    private static LoginFail pageFail = new LoginFail();
-    private static LoginOk pageOk = new LoginOk();
-
-    @Before
-    public void beforeScenario() {
-        login.updateDriver(driver);
-        pageFail.updateDriver(driver);
-        pageOk.updateDriver(driver);
-    }
+    private static Login login = new Login(driver);
+    private static LoginFail pageFail = new LoginFail(driver);
+    private static LoginOk pageOk = new LoginOk(driver);
 
     @After
     public void afterScenario() {
