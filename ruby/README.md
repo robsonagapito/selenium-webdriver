@@ -24,6 +24,6 @@ Para executar o projeto basta
 Exemplo de execução
 -------------------
 	
-	bundle exec cucumber features/tdc/bdd_example.feature -p testers
+	bundle exec cucumber features/bdd/bdd_example.feature -p testers
 
 	bundle exec cucumber features/bdd/login.feature -p testers
