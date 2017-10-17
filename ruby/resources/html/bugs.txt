@@ -1,0 +1,9 @@
+DEFEITOS
+
+1 - Label com descrição Name ao invés de Nome
+2 - Cor verde final do Form
+3 - Responsividade
+4 - Tratamento de idade com letras.
+5 - Cores dos Botões
+6 - Ovo de Páscoa
+7 - Cancelado Bobão

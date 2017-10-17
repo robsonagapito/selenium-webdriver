@@ -1,0 +1,95 @@
+ <!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="Content-Type: text/html; charset=UTF-8">
+    <title>GFT - QA</title>
+  </head>
+  <body>
+    <form name="form1" method="post">    
+      <div id="um" style="border:1px solid black; position:absolute; width:auto; height:auto; float:left;background-color: blue">
+        <img src="GFT.PNG" height="452px" width="461px">
+      </div>
+      <div id="dois" style="border:1px solid black; position:absolute; margin-left: 462px; width:338px ;height: 458px;">
+        <div id="doisum" style="margin-left:10px; margin-top: 40px;"> 
+
+          <p id=lblnome> Nome: <input type="text" id="nome" name="firstname" style= "width:20em" onfocus="alteraLabel(0)"> 
+          </p>
+          <p id="lblradio">
+            <input type="radio" id="gender" name="gender" value="male"  onfocus="alteraLabel(0)"> Masculino<br>
+            <input type="radio" id="gender" name="gender" value="female"  onfocus="alteraLabel(0)"> Feminino
+          </p>
+          <p id=lblcheck>
+            <input type="checkbox" id="checkbike" name="bike" onfocus="alteraLabel(0)"> Eu tenho uma bicicleta<br>
+            <input type="checkbox" id="checkcarro" name="car" onfocus="alteraLabel(0)"> Eu tenho um carro
+          </p>
+          <p id=lblinput>Usuário: <input type="text" id="user" name="user" onfocus="alteraLabel(0)">
+          </p>
+          <p id=lbldate> Idade: <input type="number" id="idade" name="idade" style= "width:3em" maxlength=3 onfocus="alteraLabel(0)">
+          </p>
+          </br>
+          <input type="button" style="background-color:green;color:white" id="salvar" name="salvar" value="Salvar" onclick="alteraTexto()">        
+          <input type="button" style="background-color:red;color:white" id="cancelar" name="cancelar" value="Cancelar" onclick="alertaBobao()">        
+        </div>
+        <div id="doisresposta" style="border:2px solid black; margin-top:27px;"  text-align="center">
+          <p id="lblresposta" align="center" style="color:black;">Testando - Quality Assurance</p>
+        </div>
+        <br>
+        <br>
+        <br>
+        <p align="right">
+          <!--a href="cadastro_ok.html"> O </a -->
+        </p>        
+      </div>
+    </form>
+  </body>
+</html> 
+<!-- script type="text/javascript" language="javascript" src="javascript/jquery.js" -->
+<script type="text/javascript" language="javascript">
+    function alteraTexto(){
+      var idade = document.getElementById('idade').value;
+      var numidade = parseInt(idade);
+      
+      if ((numidade >= 18) && (numidade <= 65))  {
+        alteraLabel(1);
+        limpaCampos();
+      }
+      else{
+        alteraLabel(2);
+      }
+    }
+
+    function alertaBobao(){
+      alteraLabel(3);
+      limpaCampos();
+    }
+
+    function limpaCampos(){
+        document.getElementById('nome').value = "";
+        document.getElementById('user').value = "";
+        document.getElementById('idade').value = "";
+        
+        document.getElementById('checkbike').checked  = false;
+        document.getElementById('checkcarro').checked = false;
+    }
+
+    function alteraLabel(e){
+      if (e == 3) {
+        document.getElementById("lblresposta").style.color="red";
+        document.getElementById('lblresposta').innerHTML = "Cancelado com sucesso.";
+      }
+      else if (e == 2) {
+        document.getElementById("lblresposta").style.color="red";
+        document.getElementById('lblresposta').innerHTML = "A idade tem que ser entre 18 e 65 anos";
+      }
+      else if (e == 1) {
+        document.getElementById("lblresposta").style.color="green";
+        document.getElementById('lblresposta').innerHTML = "Registro gravado com sucesso.";
+      } 
+      else {
+        document.getElementById("lblresposta").style.color="black";
+        document.getElementById('lblresposta').innerHTML = "Testando - Quality Assurance";
+      } 
+    };
+
+</script>
+
