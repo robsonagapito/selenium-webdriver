@@ -70,4 +70,24 @@ public class LoginSteps extends BaseSteps {
         }
 
     }
+
+    @And("^user informs login with value equal \"([^\"]*)\" with xpath$")
+    public void userInformsLoginWithValueEqualWithXpath(String value) throws Throwable {
+        login.fillLoginXpath(value);
+    }
+
+    @And("^user informs login with value equal \"([^\"]*)\" with css$")
+    public void userInformsLoginWithValueEqualWithCss(String value) throws Throwable {
+        login.fillLoginCSS(value);
+    }
+
+    @And("^user informs login with value equal \"([^\"]*)\" with name$")
+    public void userInformsLoginWithValueEqualWithName(String value) throws Throwable {
+        login.fillLoginName(value);
+    }
+
+    @And("^user informs login with value equal \"([^\"]*)\" with id$")
+    public void userInformsLoginWithValueEqualWithId(String value) throws Throwable {
+        login.fillLogin(value);
+    }
 }

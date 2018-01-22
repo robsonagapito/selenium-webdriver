@@ -31,4 +31,16 @@ public class Login {
         return driver.getText("result");
     }
 
+    public void fillLoginXpath(String value) {
+        driver.sendKeys(value,"//*[@id=\"login\"]", "xpath");
+    }
+
+    public void fillLoginCSS(String value) {
+        driver.sendKeys(value,"#login", "css");
+    }
+
+    public void fillLoginName(String value) {
+        driver.sendKeys(value,"uname", "name");
+    }
+
 }
