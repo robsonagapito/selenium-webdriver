@@ -4,8 +4,9 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,33 +15,50 @@ import java.util.NoSuchElementException;
 
 public class DriverQA {
 
-    private WebDriver driver;
+    private static WebDriver driver;
 
     public void start(String parBrowser){
-        switch (parBrowser) {
-            case "firefox":
-                FirefoxDriverManager.getInstance().setup();
-                DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-                capabilities.setCapability("marionette", true);
-                driver = new FirefoxDriver(capabilities);
-                break;
-            case "chrome":
-                ChromeDriverManager.getInstance().setup();
-                DesiredCapabilities capabilitiesC = DesiredCapabilities.chrome();
-                capabilitiesC.setCapability("chrome.switches", Arrays.asList("--ignore-certificate-errors"));
-                driver = new ChromeDriver(capabilitiesC);
-                break;
-            default:
-                break;
+        String title = "";
+        try{
+            title = driver.getTitle();
+        } catch (Exception e){
+            title = "ERROR";
+        }
+        if (title.equals("ERROR")) {
+            switch (parBrowser) {
+                case "firefox":
+
+                    FirefoxDriverManager.getInstance().setup();
+                    FirefoxOptions options = new FirefoxOptions();
+                    options.addPreference(FirefoxDriver.MARIONETTE, true);
+                    driver = new FirefoxDriver(options);
+                    driver.manage().window().maximize();
+
+                    break;
+                case "chrome":
+                    ChromeDriverManager.getInstance().setup();
+                    ChromeOptions optionsC = new ChromeOptions();
+                    // hides the info message that says chrome is being controlled by automated test software
+                    optionsC.addArguments(Arrays.asList(
+                            "disable-infobars", "ignore-certificate-errors",
+                            "start-maximized"));
+                    driver = new ChromeDriver(optionsC);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
+    private String getAttributeType (String... parType){
+        String type;
+        if (parType.length == 0) { type = "id"; }
+        else { type = parType[0];}
+        return type;
+    }
     private WebElement findElem(String parValue, String... parType){
-        String sel_type = "";
-        String param2 = "";
+        String param2 = getAttributeType(parType);
         WebElement element = null;
-        if (parType.length == 0) { param2 = "id"; }
-        else { param2 = parType[0];}
         try {
             switch (param2) {
                 case "id":
@@ -110,11 +128,8 @@ public class DriverQA {
     }
 
     public void waitElementAll(String parName, String... parType){
-        WebElement element = findElem(parName, parType);
         WebDriverWait wait = new WebDriverWait(driver, 60);
-        String param2 = "";
-        if (parType.length == 0) { param2 = "id"; }
-        else { param2 = parType[0];}
+        String param2 = getAttributeType(parType);
         try {
             switch (param2) {
                 case "id":
@@ -158,7 +173,7 @@ public class DriverQA {
             driver.switchTo().defaultContent();
         }
         else{
-            driver.switchTo().window(String.valueOf(parValue));
+            driver.switchTo().window(Arrays.toString(parValue));
         }
     }
 
