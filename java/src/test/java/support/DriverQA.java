@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class DriverQA {
 
@@ -27,22 +28,22 @@ public class DriverQA {
         if (title.equals("ERROR")) {
             switch (parBrowser) {
                 case "firefox":
-
                     FirefoxDriverManager.getInstance().setup();
                     FirefoxOptions options = new FirefoxOptions();
                     options.addPreference(FirefoxDriver.MARIONETTE, true);
                     driver = new FirefoxDriver(options);
                     driver.manage().window().maximize();
-
+                    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                     break;
                 case "chrome":
-                    ChromeDriverManager.getInstance().setup();
+//                    ChromeDriverManager.getInstance().setup();
                     ChromeOptions optionsC = new ChromeOptions();
                     // hides the info message that says chrome is being controlled by automated test software
                     optionsC.addArguments(Arrays.asList(
                             "disable-infobars", "ignore-certificate-errors",
                             "start-maximized"));
                     driver = new ChromeDriver(optionsC);
+                    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                     break;
                 default:
                     break;
