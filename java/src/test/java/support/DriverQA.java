@@ -18,6 +18,10 @@ public class DriverQA {
 
     private static WebDriver driver;
 
+    public WebDriver getSelenium() {
+        return driver;
+    }
+
     public void start(String parBrowser){
         String title = "";
         try{
@@ -111,6 +115,11 @@ public class DriverQA {
         WebElement element = findElem(parValue, parType);
         return element.getText();
     }
+
+    public Boolean getTextAllPage(String parValue){
+        return driver.getPageSource().contains(parValue);
+    }
+
 
     public void selectByIndex(Integer parIndex, String parName, String... parType) {
         WebElement element = findElem(parName, parType);
